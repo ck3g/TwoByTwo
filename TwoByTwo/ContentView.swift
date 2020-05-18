@@ -22,7 +22,7 @@ struct ContentView: View {
   var body: some View {
     GeometryReader { geo in
       VStack {
-        Text("Two by Two")
+        Text("Two times Two")
           .font(.largeTitle)
           .padding(.top, self.sizeClass == .compact ? 20 : 10)
 
