@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Vitali Tatarintev built the TwoByTwo app as a Free app. This SERVICE is provided by Vitali Tatarintev at no cost and is intended for use as is.
+Vitali Tatarintev built the "Two times Two" app as a Free app. This SERVICE is provided by Vitali Tatarintev at no cost and is intended for use as is.
 
 This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
 

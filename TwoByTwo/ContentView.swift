@@ -19,65 +19,92 @@ struct ContentView: View {
   @State private var selectedNumberOfQuestions = "10"
   @State private var isPracticeStarted = false
 
+  let minPracticeRange = 2
+  let maxPracticeRange = 10
+  let cornerRadius: CGFloat = 5
+  var practiceButtonSize: CGFloat {
+    sizeClass == .compact ? 70 : 50
+  }
+
   var body: some View {
     GeometryReader { geo in
       VStack {
-        Text("Two by Two")
-          .font(.largeTitle)
+        Text("Two times Two")
+          .font(self.sizeClass == .compact ? .largeTitle : .title)
           .padding(.top, self.sizeClass == .compact ? 20 : 10)
 
         GeometryReader { _ in
-          VStack {
-            Group {
-              Stepper("Practice up to \(self.practiceRange)x10", value: self.$practiceRange, in: 2...10)
-                .padding(.bottom, self.sizeClass == .compact ? 20 : 0)
-                .frame(width: self.screenWidth(geo))
-
-              HStack(alignment: .center) {
-                ForEach(2 ..< 11) { numbersRange in
+          ScrollView(showsIndicators: false) {
+            VStack {
+              Group {
+                HStack {
                   Button(action: {
-                    self.practiceRange = numbersRange
+                    guard self.practiceRange > self.minPracticeRange else { return }
+                    self.practiceRange -= 1
                   }) {
-                    Text("\(numbersRange)")
-                      .frame(width: self.sizeClass == .compact ? 20 : 42)
-                      .padding(7)
-                      .background(numbersRange <= self.practiceRange ? Color.orange : Color.gray)
+                    Text("-")
+                      .padding(10)
+                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
+                      .background(self.practiceRange > self.minPracticeRange ? Color.orange : Color.gray)
                       .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: 5))
-                      .animation(.easeInOut)
+                      .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
+                  }
+                    .disabled(self.practiceRange <= self.minPracticeRange)
+
+                  Text("\(self.practiceRange) · \(self.maxPracticeRange)")
+                    .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
+                    .padding(10)
+                    .overlay(
+                      RoundedRectangle(cornerRadius: self.cornerRadius)
+                        .stroke(Color.orange, lineWidth: 2)
+                    )
+
+                  Button(action: {
+                    guard self.practiceRange < self.maxPracticeRange else { return }
+                    self.practiceRange += 1
+                  }) {
+                    Text("+")
+                      .padding(10)
+                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
+                      .background(self.practiceRange < self.maxPracticeRange ? Color.orange : Color.gray)
+                      .foregroundColor(.white)
+                      .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
+                  }
+                    .disabled(self.practiceRange >= self.maxPracticeRange)
+                }
+              }
+                .padding([.top, .bottom], 10)
+                .font(.title)
+
+              Group {
+                Text("Number of questions?")
+                  .font(.headline)
+                  .padding(10)
+                  .padding(.top, self.sizeClass == .compact ? 20 : 10)
+
+                HStack(alignment: .center) {
+                  ForEach(self.numberOfQuestions, id: \.self) { questionNumber in
+                    Button(action: {
+                      self.selectedNumberOfQuestions = questionNumber
+                    }) {
+                      Text(questionNumber)
+                        .frame(width: self.sizeClass == .compact ? 50 : 100)
+                        .padding(18)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
+                        .overlay(
+                          withAnimation(.spring()) {
+                            questionNumber == self.selectedNumberOfQuestions ? RoundedRectangle(cornerRadius: self.cornerRadius).stroke(Color.orange, lineWidth: 3) : nil
+                          }
+                        )
+                    }
                   }
                 }
               }
+
+              Spacer()
             }
-
-            Group {
-              Text("Number of questions?")
-                .font(.headline)
-                .padding(10)
-                .padding(.top, self.sizeClass == .compact ? 20 : 10)
-
-              HStack(alignment: .center) {
-                ForEach(self.numberOfQuestions, id: \.self) { questionNumber in
-                  Button(action: {
-                    self.selectedNumberOfQuestions = questionNumber
-                  }) {
-                    Text(questionNumber)
-                      .frame(width: self.sizeClass == .compact ? 50 : 100)
-                      .padding(18)
-                      .background(Color.green)
-                      .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: 10))
-                      .overlay(
-                        withAnimation(.spring()) {
-                          questionNumber == self.selectedNumberOfQuestions ? RoundedRectangle(cornerRadius: 10).stroke(Color.orange, lineWidth: 3) : nil
-                        }
-                      )
-                  }
-                }
-              }
-            }
-
-            Spacer()
           }
         }
 
@@ -91,7 +118,7 @@ struct ContentView: View {
             .frame(width: self.screenWidth(geo))
             .background(Color.blue)
             .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
         }
         .padding(.bottom, 15)
       }
@@ -113,6 +140,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    ContentView().environmentObject(PracticeSettings())
   }
 }

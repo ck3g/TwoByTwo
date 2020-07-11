@@ -19,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		343B783A23E5A37800993C95 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
-		346FEF1823827ABD00F0F7A9 /* TwoByTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoByTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		346FEF1823827ABD00F0F7A9 /* Two times Two.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Two times Two.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		346FEF1B23827ABD00F0F7A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		346FEF1D23827ABD00F0F7A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		346FEF1F23827ABD00F0F7A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		346FEF1923827ABD00F0F7A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				346FEF1823827ABD00F0F7A9 /* TwoByTwo.app */,
+				346FEF1823827ABD00F0F7A9 /* Two times Two.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,7 +98,7 @@
 			);
 			name = TwoByTwo;
 			productName = TwoByTwo;
-			productReference = 346FEF1823827ABD00F0F7A9 /* TwoByTwo.app */;
+			productReference = 346FEF1823827ABD00F0F7A9 /* Two times Two.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -294,15 +294,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TwoByTwo/Preview Content\"";
-				DEVELOPMENT_TEAM = 855DKE28RW;
+				DEVELOPMENT_TEAM = 9487RPB949;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TwoByTwo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ck3g.tatarintev.vitali.TwoByTwo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = ck3g.tatarinteva.natalia.TwoByTwo;
+				PRODUCT_NAME = "Two times Two";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -314,15 +314,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TwoByTwo/Preview Content\"";
-				DEVELOPMENT_TEAM = 855DKE28RW;
+				DEVELOPMENT_TEAM = 9487RPB949;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TwoByTwo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ck3g.tatarintev.vitali.TwoByTwo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = ck3g.tatarinteva.natalia.TwoByTwo;
+				PRODUCT_NAME = "Two times Two";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
