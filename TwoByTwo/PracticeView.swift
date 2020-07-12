@@ -59,7 +59,7 @@ struct PracticeView: View {
   ]
   @State private var questions: [Question] = []
   @State private var nextButtonDisabled = true
-  @State private var buttonColors = Array(repeating: Color.orange, count: 4)
+  @State private var buttonColors = Array(repeating: Color("AppOrange"), count: 4)
   @State private var buttonDidTap = false
   @State private var isPracticeFinished = false
 
@@ -83,7 +83,7 @@ struct PracticeView: View {
             self.presentationMode.wrappedValue.dismiss()
           }) {
             Image(systemName: "xmark")
-              .foregroundColor(.red)
+              .foregroundColor(Color("AppRed"))
           }
         }
         .font(.headline)
@@ -142,7 +142,7 @@ struct PracticeView: View {
                 self.currentAnswerSuggestions = self.generateAnswerSuggestions(question: self.currentQuestion)
                 self.nextButtonDisabled = true
                 self.buttonDidTap = false
-                self.buttonColors = Array(repeating: Color.orange, count: 4)
+                self.buttonColors = Array(repeating: Color("AppOrange"), count: 4)
               } else {
                 self.isPracticeFinished = true
               }
@@ -150,7 +150,7 @@ struct PracticeView: View {
               Image(systemName: "forward.fill")
                 .padding(25)
                 .frame(width: self.screenWidth(geo))
-                .background(self.nextButtonDisabled ? Color.gray : Color.blue)
+                .background(self.nextButtonDisabled ? Color.gray : Color("AppBlue"))
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
@@ -159,7 +159,7 @@ struct PracticeView: View {
             VStack {
               Text("Good job!")
                 .font(.title)
-                .foregroundColor(.green)
+                .foregroundColor(Color("AppGreen"))
                 .padding()
 
               Button(action: {
@@ -168,7 +168,7 @@ struct PracticeView: View {
                 Image(systemName: "stop.fill")
                   .padding(25)
                   .frame(width: self.screenWidth(geo))
-                  .background(Color.green)
+                  .background(Color("AppGreen"))
                   .foregroundColor(.white)
                   .clipShape(RoundedRectangle(cornerRadius: 10))
               }
@@ -225,11 +225,11 @@ struct PracticeView: View {
   }
 
   func calculateButtonColor(buttonIndex: Int) -> Color {
-    guard self.buttonDidTap else { return Color.orange }
+    guard self.buttonDidTap else { return Color("AppOrange") }
 
-    guard self.currentAnswerSuggestions[buttonIndex].isCorrect else { return Color.red }
+    guard self.currentAnswerSuggestions[buttonIndex].isCorrect else { return Color("AppRed") }
 
-    return Color.green
+    return Color("AppGreen")
   }
 
   func tapAnswerButton(index: Int) {

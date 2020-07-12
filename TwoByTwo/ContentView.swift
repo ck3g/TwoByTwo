@@ -45,7 +45,7 @@ struct ContentView: View {
                     Text("-")
                       .padding(10)
                       .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
-                      .background(self.practiceRange > self.minPracticeRange ? Color.orange : Color.gray)
+                      .background(self.practiceRange > self.minPracticeRange ? Color("AppOrange") : Color.gray)
                       .foregroundColor(.white)
                       .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
                   }
@@ -56,7 +56,7 @@ struct ContentView: View {
                     .padding(10)
                     .overlay(
                       RoundedRectangle(cornerRadius: self.cornerRadius)
-                        .stroke(Color.orange, lineWidth: 2)
+                        .stroke(Color("AppOrange"), lineWidth: 2)
                     )
 
                   Button(action: {
@@ -66,7 +66,7 @@ struct ContentView: View {
                     Text("+")
                       .padding(10)
                       .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
-                      .background(self.practiceRange < self.maxPracticeRange ? Color.orange : Color.gray)
+                      .background(self.practiceRange < self.maxPracticeRange ? Color("AppOrange") : Color.gray)
                       .foregroundColor(.white)
                       .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
                   }
@@ -90,14 +90,10 @@ struct ContentView: View {
                       Text(questionNumber)
                         .frame(width: self.sizeClass == .compact ? 50 : 100)
                         .padding(18)
-                        .background(Color.green)
+                        .background(Color("AppGreen"))
                         .foregroundColor(.white)
+                        .font(questionNumber == self.selectedNumberOfQuestions ? .title : .body)
                         .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
-                        .overlay(
-                          withAnimation(.spring()) {
-                            questionNumber == self.selectedNumberOfQuestions ? RoundedRectangle(cornerRadius: self.cornerRadius).stroke(Color.orange, lineWidth: 3) : nil
-                          }
-                        )
                     }
                   }
                 }
@@ -116,7 +112,7 @@ struct ContentView: View {
           Image(systemName: "play.fill")
             .padding(25)
             .frame(width: self.screenWidth(geo))
-            .background(Color.blue)
+            .background(Color("AppBlue"))
             .foregroundColor(.white)
             .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
         }
