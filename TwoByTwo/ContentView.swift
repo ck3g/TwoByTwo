@@ -21,7 +21,6 @@ struct ContentView: View {
 
   let minPracticeRange = 2
   let maxPracticeRange = 10
-  let cornerRadius: CGFloat = 5
   var practiceButtonSize: CGFloat {
     sizeClass == .compact ? 70 : 50
   }
@@ -47,7 +46,7 @@ struct ContentView: View {
                       .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
                       .background(self.practiceRange > self.minPracticeRange ? Color("AppOrange") : Color.gray)
                       .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
+                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                   }
                     .disabled(self.practiceRange <= self.minPracticeRange)
 
@@ -55,7 +54,7 @@ struct ContentView: View {
                     .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
                     .padding(10)
                     .overlay(
-                      RoundedRectangle(cornerRadius: self.cornerRadius)
+                      RoundedRectangle(cornerRadius: UISettings.cornerRadius)
                         .stroke(Color("AppOrange"), lineWidth: 2)
                     )
 
@@ -68,7 +67,7 @@ struct ContentView: View {
                       .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
                       .background(self.practiceRange < self.maxPracticeRange ? Color("AppOrange") : Color.gray)
                       .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
+                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                   }
                     .disabled(self.practiceRange >= self.maxPracticeRange)
                 }
@@ -93,7 +92,7 @@ struct ContentView: View {
                         .background(Color("AppGreen"))
                         .foregroundColor(.white)
                         .font(questionNumber == self.selectedNumberOfQuestions ? .title : .body)
-                        .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
+                        .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                     }
                   }
                 }
@@ -114,7 +113,7 @@ struct ContentView: View {
             .frame(width: self.screenWidth(geo))
             .background(Color("AppBlue"))
             .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: self.cornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
         }
         .padding(.bottom, 15)
       }

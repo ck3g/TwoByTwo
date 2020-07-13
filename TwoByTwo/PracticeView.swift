@@ -35,7 +35,7 @@ struct NewAnswerButton: View {
         .padding(35)
         .foregroundColor(.white)
         .background(self.backgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
         .animation(.easeInOut)
     }
   }
@@ -152,7 +152,7 @@ struct PracticeView: View {
                 .frame(width: self.screenWidth(geo))
                 .background(self.nextButtonDisabled ? Color.gray : Color("AppBlue"))
                 .foregroundColor(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
             }
             .disabled(self.nextButtonDisabled)
           } else {
@@ -170,7 +170,7 @@ struct PracticeView: View {
                   .frame(width: self.screenWidth(geo))
                   .background(Color("AppGreen"))
                   .foregroundColor(.white)
-                  .clipShape(RoundedRectangle(cornerRadius: 10))
+                  .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
               }
             }
           }
