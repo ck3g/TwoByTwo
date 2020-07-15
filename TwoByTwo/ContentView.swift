@@ -19,6 +19,7 @@ struct ContentView: View {
   @State private var additionSumRange = 20
   @State private var selectedNumberOfQuestions = "10"
   @State private var isPracticeStarted = false
+  @State private var exerciseType: ExerciseTypes = ExerciseTypes.multiplication
 
   let minPracticeRange = 2
   let maxPracticeRange = 10
@@ -55,13 +56,18 @@ struct ContentView: View {
                   }
                     .disabled(self.practiceRange <= self.minPracticeRange)
 
-                  Text("\(self.practiceRange) · \(self.maxPracticeRange)")
-                    .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
-                    .padding(10)
-                    .overlay(
-                      RoundedRectangle(cornerRadius: UISettings.cornerRadius)
-                        .stroke(Color("AppOrange"), lineWidth: 2)
-                    )
+                  Button(action: {
+                    self.exerciseType = ExerciseTypes.multiplication
+                  }) {
+                    Text("\(self.practiceRange) · \(self.maxPracticeRange)")
+                      .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
+                      .padding(10)
+                      .foregroundColor(self.exerciseType == ExerciseTypes.multiplication ? Color("AppOrange") : Color.gray)
+                      .overlay(
+                        RoundedRectangle(cornerRadius: UISettings.cornerRadius)
+                          .stroke(self.exerciseType == ExerciseTypes.multiplication ? Color("AppOrange") : Color.gray, lineWidth: 2)
+                      )
+                  }
 
                   Button(action: {
                     guard self.practiceRange < self.maxPracticeRange else { return }
@@ -96,13 +102,18 @@ struct ContentView: View {
                   }
                     .disabled(self.additionSumRange <= self.additionMinSumRange)
 
-                  Text("A + B = \(self.additionSumRange)")
-                    .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
-                    .padding(10)
-                    .overlay(
-                      RoundedRectangle(cornerRadius: UISettings.cornerRadius)
-                        .stroke(Color("AppOrange"), lineWidth: 2)
-                    )
+                  Button(action: {
+                    self.exerciseType = ExerciseTypes.addition
+                  }) {
+                    Text("A + B = \(self.additionSumRange)")
+                      .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
+                      .padding(10)
+                      .foregroundColor(self.exerciseType == ExerciseTypes.addition ? Color("AppOrange") : Color.gray)
+                      .overlay(
+                        RoundedRectangle(cornerRadius: UISettings.cornerRadius)
+                          .stroke(self.exerciseType == ExerciseTypes.addition ? Color("AppOrange") : Color.gray, lineWidth: 2)
+                      )
+                  }
 
                   Button(action: {
                     guard self.additionSumRange < self.additionMaxSumRange else { return }
@@ -150,7 +161,7 @@ struct ContentView: View {
         }
 
         Button(action: {
-          self.settings.exerciseType = .multiplication
+          self.settings.exerciseType = self.exerciseType
           self.isPracticeStarted = true
           self.settings.practiceRange = self.practiceRange
           self.settings.selectedNumberOfQuestions = self.selectedNumberOfQuestions
