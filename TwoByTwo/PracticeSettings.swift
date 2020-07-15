@@ -9,6 +9,10 @@
 import SwiftUI
 import Combine
 
+enum ExerciseTypes {
+  case multiplication
+}
+
 final class PracticeSettings: ObservableObject {
   @Published var practiceRange: Int {
     didSet {
@@ -20,6 +24,8 @@ final class PracticeSettings: ObservableObject {
       UserDefaults.standard.set(selectedNumberOfQuestions, forKey: "selectedNumberOfQuestions")
     }
   }
+
+  var exerciseType = ExerciseTypes.multiplication
 
   init() {
     self.practiceRange = 4

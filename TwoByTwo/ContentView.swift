@@ -104,6 +104,7 @@ struct ContentView: View {
         }
 
         Button(action: {
+          self.settings.exerciseType = .multiplication
           self.isPracticeStarted = true
           self.settings.practiceRange = self.practiceRange
           self.settings.selectedNumberOfQuestions = self.selectedNumberOfQuestions
