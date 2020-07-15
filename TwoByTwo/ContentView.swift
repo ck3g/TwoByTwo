@@ -16,6 +16,7 @@ struct ContentView: View {
   let numberOfQuestions = ["5", "10", "20", "All"]
 
   @State private var practiceRange = 4
+  @State private var additionSumRange = 20
   @State private var selectedNumberOfQuestions = "10"
   @State private var isPracticeStarted = false
 
@@ -24,6 +25,9 @@ struct ContentView: View {
   var practiceButtonSize: CGFloat {
     sizeClass == .compact ? 70 : 50
   }
+
+  let additionMinSumRange = 10
+  let additionMaxSumRange = 100
 
   var body: some View {
     GeometryReader { geo in
@@ -35,6 +39,7 @@ struct ContentView: View {
         GeometryReader { _ in
           ScrollView(showsIndicators: false) {
             VStack {
+              // Multiplication exercise
               Group {
                 HStack {
                   Button(action: {
@@ -70,6 +75,47 @@ struct ContentView: View {
                       .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                   }
                     .disabled(self.practiceRange >= self.maxPracticeRange)
+                }
+              }
+                .padding([.top, .bottom], 10)
+                .font(.title)
+
+              // Addition exercise
+              Group {
+                HStack {
+                  Button(action: {
+                    guard self.additionSumRange > self.additionMinSumRange else { return }
+                    self.additionSumRange -= 10
+                  }) {
+                    Text("-")
+                      .padding(10)
+                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
+                      .background(self.additionSumRange > self.additionMinSumRange ? Color("AppOrange") : Color.gray)
+                      .foregroundColor(.white)
+                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
+                  }
+                    .disabled(self.additionSumRange <= self.additionMinSumRange)
+
+                  Text("A + B = \(self.additionSumRange)")
+                    .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
+                    .padding(10)
+                    .overlay(
+                      RoundedRectangle(cornerRadius: UISettings.cornerRadius)
+                        .stroke(Color("AppOrange"), lineWidth: 2)
+                    )
+
+                  Button(action: {
+                    guard self.additionSumRange < self.additionMaxSumRange else { return }
+                    self.additionSumRange += 10
+                  }) {
+                    Text("+")
+                      .padding(10)
+                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
+                      .background(self.additionSumRange < self.additionMaxSumRange ? Color("AppOrange") : Color.gray)
+                      .foregroundColor(.white)
+                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
+                  }
+                    .disabled(self.additionSumRange >= self.additionMaxSumRange)
                 }
               }
                 .padding([.top, .bottom], 10)
