@@ -11,13 +11,28 @@ import SwiftUI
 struct Question {
   var multiplier: Int
   var multiplicant: Int
+  var exerciseType: ExerciseTypes
+
+  var sign: String {
+    switch exerciseType {
+    case .addition:
+      return "+"
+    default:
+      return "·"
+    }
+  }
 
   var product: Int {
-    multiplier * multiplicant
+    switch exerciseType {
+    case .addition:
+      return multiplier + multiplicant
+    default:
+      return multiplier * multiplicant
+    }
   }
 
   var toString: String {
-    "\(multiplier) X \(multiplicant) = ?"
+    "\(multiplier) \(sign) \(multiplicant) = ?"
   }
 }
 
@@ -50,7 +65,7 @@ struct PracticeView: View {
   @EnvironmentObject var settings: PracticeSettings
 
   @State private var questionsAnswered = 0
-  @State private var currentQuestion = Question(multiplier: 2, multiplicant: 2)
+  @State private var currentQuestion = Question(multiplier: 2, multiplicant: 2, exerciseType: .multiplication)
   @State private var currentAnswerSuggestions = [
     (value: 0, isCorrect: false),
     (value: 0, isCorrect: false),
@@ -138,7 +153,7 @@ struct PracticeView: View {
               self.questionsAnswered += 1
 
               if self.questionsAnswered < self.totalQuestions {
-                self.currentQuestion = self.pickNewQuestion()
+                self.currentQuestion = self.pickNewQuestion(ofType: self.settings.exerciseType)
                 self.currentAnswerSuggestions = self.generateAnswerSuggestions(question: self.currentQuestion)
                 self.nextButtonDisabled = true
                 self.buttonDidTap = false
@@ -178,8 +193,8 @@ struct PracticeView: View {
         .padding()
       }
       .onAppear(perform: {
-        self.generateQuestions()
-        self.currentQuestion = self.pickNewQuestion()
+        self.generateQuestions(ofType: self.settings.exerciseType)
+        self.currentQuestion = self.pickNewQuestion(ofType: self.settings.exerciseType)
         self.currentAnswerSuggestions = self.generateAnswerSuggestions(question: self.currentQuestion)
       })
     }
@@ -193,16 +208,16 @@ struct PracticeView: View {
     self.screenWidth(geo) / buttonsPerLine - 76 // 76 here calculated in the experimental way
   }
 
-  func pickNewQuestion() -> Question {
+  func pickNewQuestion(ofType exerciseType: ExerciseTypes) -> Question {
     self.questions.shuffle()
 
-    return self.questions.popLast() ?? Question(multiplier: 2, multiplicant: 2)
+    return self.questions.popLast() ?? Question(multiplier: 2, multiplicant: 2, exerciseType: exerciseType)
   }
 
-  func generateQuestions() {
+  func generateQuestions(ofType exerciseType: ExerciseTypes) {
     for multiplier in 1...self.settings.practiceRange {
       for multiplicant in 0..<self.questionsPerTable {
-        self.questions.append(Question(multiplier: multiplier, multiplicant: multiplicant))
+        self.questions.append(Question(multiplier: multiplier, multiplicant: multiplicant, exerciseType: exerciseType))
       }
     }
 
