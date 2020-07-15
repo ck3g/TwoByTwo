@@ -215,9 +215,19 @@ struct PracticeView: View {
   }
 
   func generateQuestions(ofType exerciseType: ExerciseTypes) {
-    for multiplier in 1...self.settings.practiceRange {
-      for multiplicant in 0..<self.questionsPerTable {
-        self.questions.append(Question(multiplier: multiplier, multiplicant: multiplicant, exerciseType: exerciseType))
+    switch exerciseType {
+    case .addition:
+      for sum in 1...self.settings.additionSumRange {
+        let firstNumber = Int.random(in: 0..<sum)
+        let secondNumber = sum - firstNumber
+
+        self.questions.append(Question(multiplier: firstNumber, multiplicant: secondNumber, exerciseType: exerciseType))
+      }
+    default:
+      for multiplier in 1...self.settings.practiceRange {
+        for multiplicant in 0..<self.questionsPerTable {
+          self.questions.append(Question(multiplier: multiplier, multiplicant: multiplicant, exerciseType: exerciseType))
+        }
       }
     }
 
@@ -225,7 +235,11 @@ struct PracticeView: View {
   }
 
   func generateAnswerSuggestions(question: Question) -> [(value: Int, isCorrect: Bool)] {
-    let diff = question.multiplier == 0 ? 1 : question.multiplier
+    var diff = question.multiplier == 0 ? 1 : question.multiplier
+
+    if self.settings.exerciseType == .addition {
+      diff = Int.random(in: 1...2)
+    }
 
     var answers = [
       (value: question.product, isCorrect: true),
