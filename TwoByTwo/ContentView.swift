@@ -27,6 +27,27 @@ struct ChangeDifficultyButton: View {
   }
 }
 
+struct SelectExerciseTypeButton: View {
+  let label: String
+  let selected: Bool
+  let width: CGFloat
+  let height: CGFloat
+  let action: () -> Void
+
+  var body: some View {
+    Button(action: self.action) {
+      Text(self.label)
+        .frame(width: self.width, height: self.height)
+        .padding(10)
+        .foregroundColor(self.selected ? Color("AppOrange") : Color.gray)
+        .overlay(
+          RoundedRectangle(cornerRadius: UISettings.cornerRadius)
+            .stroke(self.selected ? Color("AppOrange") : Color.gray, lineWidth: 2)
+        )
+    }
+  }
+}
+
 struct ContentView: View {
   @Environment(\.horizontalSizeClass) var sizeClass
 
@@ -67,17 +88,13 @@ struct ContentView: View {
                     self.practiceRange -= 1
                   }
 
-                  Button(action: {
-                    self.exerciseType = ExerciseTypes.multiplication
-                  }) {
-                    Text("\(self.practiceRange) · \(self.maxPracticeRange)")
-                      .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
-                      .padding(10)
-                      .foregroundColor(self.exerciseType == ExerciseTypes.multiplication ? Color("AppOrange") : Color.gray)
-                      .overlay(
-                        RoundedRectangle(cornerRadius: UISettings.cornerRadius)
-                          .stroke(self.exerciseType == ExerciseTypes.multiplication ? Color("AppOrange") : Color.gray, lineWidth: 2)
-                      )
+                  SelectExerciseTypeButton(
+                    label: "\(self.practiceRange) · \(self.maxPracticeRange)",
+                    selected: self.exerciseType == ExerciseTypes.multiplication,
+                    width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34,
+                    height: self.practiceButtonSize - 20
+                  ) {
+                      self.exerciseType = ExerciseTypes.multiplication
                   }
 
                   ChangeDifficultyButton(label: "+", disabled: self.practiceRange >= self.maxPracticeRange, size: self.practiceButtonSize) {
@@ -97,17 +114,13 @@ struct ContentView: View {
                     self.additionSumRange -= 10
                   }
 
-                  Button(action: {
+                  SelectExerciseTypeButton(
+                    label: "A + B = \(self.additionSumRange)",
+                    selected: self.exerciseType == ExerciseTypes.addition,
+                    width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34,
+                    height: self.practiceButtonSize - 20
+                  ) {
                     self.exerciseType = ExerciseTypes.addition
-                  }) {
-                    Text("A + B = \(self.additionSumRange)")
-                      .frame(width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34, height: self.practiceButtonSize - 20)
-                      .padding(10)
-                      .foregroundColor(self.exerciseType == ExerciseTypes.addition ? Color("AppOrange") : Color.gray)
-                      .overlay(
-                        RoundedRectangle(cornerRadius: UISettings.cornerRadius)
-                          .stroke(self.exerciseType == ExerciseTypes.addition ? Color("AppOrange") : Color.gray, lineWidth: 2)
-                      )
                   }
 
                   ChangeDifficultyButton(label: "+", disabled: self.additionSumRange >= self.additionMaxSumRange, size: self.practiceButtonSize) {
