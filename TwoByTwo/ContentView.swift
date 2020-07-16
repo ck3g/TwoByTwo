@@ -8,6 +8,25 @@
 
 import SwiftUI
 
+struct ChangeDifficultyButton: View {
+  let label: String
+  let disabled: Bool
+  let size: CGFloat
+  let action: () -> Void
+
+  var body: some View {
+    Button(action: self.action) {
+      Text(self.label)
+        .padding(10)
+        .frame(width: self.size, height: self.size)
+        .background(self.disabled ? Color.gray : Color("AppOrange"))
+        .foregroundColor(.white)
+        .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
+    }
+    .disabled(self.disabled)
+  }
+}
+
 struct ContentView: View {
   @Environment(\.horizontalSizeClass) var sizeClass
 
@@ -43,18 +62,10 @@ struct ContentView: View {
               // Multiplication exercise
               Group {
                 HStack {
-                  Button(action: {
+                  ChangeDifficultyButton(label: "-", disabled: self.practiceRange <= self.minPracticeRange, size: self.practiceButtonSize) {
                     guard self.practiceRange > self.minPracticeRange else { return }
                     self.practiceRange -= 1
-                  }) {
-                    Text("-")
-                      .padding(10)
-                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
-                      .background(self.practiceRange > self.minPracticeRange ? Color("AppOrange") : Color.gray)
-                      .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                   }
-                    .disabled(self.practiceRange <= self.minPracticeRange)
 
                   Button(action: {
                     self.exerciseType = ExerciseTypes.multiplication
@@ -69,18 +80,10 @@ struct ContentView: View {
                       )
                   }
 
-                  Button(action: {
+                  ChangeDifficultyButton(label: "+", disabled: self.practiceRange >= self.maxPracticeRange, size: self.practiceButtonSize) {
                     guard self.practiceRange < self.maxPracticeRange else { return }
                     self.practiceRange += 1
-                  }) {
-                    Text("+")
-                      .padding(10)
-                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
-                      .background(self.practiceRange < self.maxPracticeRange ? Color("AppOrange") : Color.gray)
-                      .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                   }
-                    .disabled(self.practiceRange >= self.maxPracticeRange)
                 }
               }
                 .padding([.top, .bottom], 10)
@@ -89,18 +92,10 @@ struct ContentView: View {
               // Addition exercise
               Group {
                 HStack {
-                  Button(action: {
+                  ChangeDifficultyButton(label: "-", disabled: self.additionSumRange <= self.additionMinSumRange, size: self.practiceButtonSize) {
                     guard self.additionSumRange > self.additionMinSumRange else { return }
                     self.additionSumRange -= 10
-                  }) {
-                    Text("-")
-                      .padding(10)
-                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
-                      .background(self.additionSumRange > self.additionMinSumRange ? Color("AppOrange") : Color.gray)
-                      .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                   }
-                    .disabled(self.additionSumRange <= self.additionMinSumRange)
 
                   Button(action: {
                     self.exerciseType = ExerciseTypes.addition
@@ -115,18 +110,10 @@ struct ContentView: View {
                       )
                   }
 
-                  Button(action: {
+                  ChangeDifficultyButton(label: "+", disabled: self.additionSumRange >= self.additionMaxSumRange, size: self.practiceButtonSize) {
                     guard self.additionSumRange < self.additionMaxSumRange else { return }
                     self.additionSumRange += 10
-                  }) {
-                    Text("+")
-                      .padding(10)
-                      .frame(width: self.practiceButtonSize, height: self.practiceButtonSize)
-                      .background(self.additionSumRange < self.additionMaxSumRange ? Color("AppOrange") : Color.gray)
-                      .foregroundColor(.white)
-                      .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
                   }
-                    .disabled(self.additionSumRange >= self.additionMaxSumRange)
                 }
               }
                 .padding([.top, .bottom], 10)
