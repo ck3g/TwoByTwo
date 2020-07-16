@@ -86,6 +86,7 @@ struct ContentView: View {
                   ChangeDifficultyButton(label: "-", disabled: self.practiceRange <= self.minPracticeRange, size: self.practiceButtonSize) {
                     guard self.practiceRange > self.minPracticeRange else { return }
                     self.practiceRange -= 1
+                    self.exerciseType = ExerciseTypes.multiplication
                   }
 
                   SelectExerciseTypeButton(
@@ -100,6 +101,7 @@ struct ContentView: View {
                   ChangeDifficultyButton(label: "+", disabled: self.practiceRange >= self.maxPracticeRange, size: self.practiceButtonSize) {
                     guard self.practiceRange < self.maxPracticeRange else { return }
                     self.practiceRange += 1
+                    self.exerciseType = ExerciseTypes.multiplication
                   }
                 }
               }
@@ -112,6 +114,7 @@ struct ContentView: View {
                   ChangeDifficultyButton(label: "-", disabled: self.additionSumRange <= self.additionMinSumRange, size: self.practiceButtonSize) {
                     guard self.additionSumRange > self.additionMinSumRange else { return }
                     self.additionSumRange -= 10
+                    self.exerciseType = ExerciseTypes.addition
                   }
 
                   SelectExerciseTypeButton(
@@ -126,6 +129,7 @@ struct ContentView: View {
                   ChangeDifficultyButton(label: "+", disabled: self.additionSumRange >= self.additionMaxSumRange, size: self.practiceButtonSize) {
                     guard self.additionSumRange < self.additionMaxSumRange else { return }
                     self.additionSumRange += 10
+                    self.exerciseType = ExerciseTypes.addition
                   }
                 }
               }
