@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct Question {
-  var multiplier: Int
+  var firstNumber: Int
   var multiplicant: Int
   var exerciseType: ExerciseTypes
 
@@ -25,14 +25,14 @@ struct Question {
   var product: Int {
     switch exerciseType {
     case .addition:
-      return multiplier + multiplicant
+      return firstNumber + multiplicant
     default:
-      return multiplier * multiplicant
+      return firstNumber * multiplicant
     }
   }
 
   var toString: String {
-    "\(multiplier) \(sign) \(multiplicant) = ?"
+    "\(firstNumber) \(sign) \(multiplicant) = ?"
   }
 }
 
@@ -65,7 +65,7 @@ struct PracticeView: View {
   @EnvironmentObject var settings: PracticeSettings
 
   @State private var questionsAnswered = 0
-  @State private var currentQuestion = Question(multiplier: 2, multiplicant: 2, exerciseType: .multiplication)
+  @State private var currentQuestion = Question(firstNumber: 2, multiplicant: 2, exerciseType: .multiplication)
   @State private var currentAnswerSuggestions = [
     (value: 0, isCorrect: false),
     (value: 0, isCorrect: false),
@@ -211,7 +211,7 @@ struct PracticeView: View {
   func pickNewQuestion(ofType exerciseType: ExerciseTypes) -> Question {
     self.questions.shuffle()
 
-    return self.questions.popLast() ?? Question(multiplier: 2, multiplicant: 2, exerciseType: exerciseType)
+    return self.questions.popLast() ?? Question(firstNumber: 2, multiplicant: 2, exerciseType: exerciseType)
   }
 
   func generateQuestions(ofType exerciseType: ExerciseTypes) {
@@ -221,12 +221,12 @@ struct PracticeView: View {
         let firstNumber = Int.random(in: 0..<sum)
         let secondNumber = sum - firstNumber
 
-        self.questions.append(Question(multiplier: firstNumber, multiplicant: secondNumber, exerciseType: exerciseType))
+        self.questions.append(Question(firstNumber: firstNumber, multiplicant: secondNumber, exerciseType: exerciseType))
       }
     default:
       for multiplier in 1...self.settings.practiceRange {
         for multiplicant in 0..<self.questionsPerTable {
-          self.questions.append(Question(multiplier: multiplier, multiplicant: multiplicant, exerciseType: exerciseType))
+          self.questions.append(Question(firstNumber: multiplier, multiplicant: multiplicant, exerciseType: exerciseType))
         }
       }
     }
@@ -235,7 +235,7 @@ struct PracticeView: View {
   }
 
   func generateAnswerSuggestions(question: Question) -> [(value: Int, isCorrect: Bool)] {
-    var diff = question.multiplier == 0 ? 1 : question.multiplier
+    var diff = question.firstNumber == 0 ? 1 : question.firstNumber
 
     if self.settings.exerciseType == .addition {
       diff = Int.random(in: 1...2)
