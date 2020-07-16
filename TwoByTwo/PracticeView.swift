@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Question {
   var firstNumber: Int
-  var multiplicant: Int
+  var secondNumber: Int
   var exerciseType: ExerciseTypes
 
   var sign: String {
@@ -25,14 +25,14 @@ struct Question {
   var product: Int {
     switch exerciseType {
     case .addition:
-      return firstNumber + multiplicant
+      return firstNumber + secondNumber
     default:
-      return firstNumber * multiplicant
+      return firstNumber * secondNumber
     }
   }
 
   var toString: String {
-    "\(firstNumber) \(sign) \(multiplicant) = ?"
+    "\(firstNumber) \(sign) \(secondNumber) = ?"
   }
 }
 
@@ -65,7 +65,7 @@ struct PracticeView: View {
   @EnvironmentObject var settings: PracticeSettings
 
   @State private var questionsAnswered = 0
-  @State private var currentQuestion = Question(firstNumber: 2, multiplicant: 2, exerciseType: .multiplication)
+  @State private var currentQuestion = Question(firstNumber: 2, secondNumber: 2, exerciseType: .multiplication)
   @State private var currentAnswerSuggestions = [
     (value: 0, isCorrect: false),
     (value: 0, isCorrect: false),
@@ -211,7 +211,7 @@ struct PracticeView: View {
   func pickNewQuestion(ofType exerciseType: ExerciseTypes) -> Question {
     self.questions.shuffle()
 
-    return self.questions.popLast() ?? Question(firstNumber: 2, multiplicant: 2, exerciseType: exerciseType)
+    return self.questions.popLast() ?? Question(firstNumber: 2, secondNumber: 2, exerciseType: exerciseType)
   }
 
   func generateQuestions(ofType exerciseType: ExerciseTypes) {
@@ -221,12 +221,12 @@ struct PracticeView: View {
         let firstNumber = Int.random(in: 0..<sum)
         let secondNumber = sum - firstNumber
 
-        self.questions.append(Question(firstNumber: firstNumber, multiplicant: secondNumber, exerciseType: exerciseType))
+        self.questions.append(Question(firstNumber: firstNumber, secondNumber: secondNumber, exerciseType: exerciseType))
       }
     default:
       for multiplier in 1...self.settings.practiceRange {
         for multiplicant in 0..<self.questionsPerTable {
-          self.questions.append(Question(firstNumber: multiplier, multiplicant: multiplicant, exerciseType: exerciseType))
+          self.questions.append(Question(firstNumber: multiplier, secondNumber: multiplicant, exerciseType: exerciseType))
         }
       }
     }
