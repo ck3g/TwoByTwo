@@ -22,7 +22,7 @@ struct Question {
     }
   }
 
-  var product: Int {
+  var result: Int {
     switch exerciseType {
     case .addition:
       return firstNumber + secondNumber
@@ -242,10 +242,10 @@ struct PracticeView: View {
     }
 
     var answers = [
-      (value: question.product, isCorrect: true),
-      (value: question.product + diff, isCorrect: false),
-      (value: question.product - diff, isCorrect: false),
-      (value: question.product + diff + 1, isCorrect: false)
+      (value: question.result, isCorrect: true),
+      (value: question.result + diff, isCorrect: false),
+      (value: question.result - diff, isCorrect: false),
+      (value: question.result + diff + 1, isCorrect: false)
     ]
 
     answers.shuffle()
