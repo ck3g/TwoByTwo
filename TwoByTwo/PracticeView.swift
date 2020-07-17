@@ -17,6 +17,8 @@ struct Question {
     switch exerciseType {
     case .addition:
       return "+"
+    case .subtraction:
+      return "-"
     default:
       return "·"
     }
@@ -26,6 +28,8 @@ struct Question {
     switch exerciseType {
     case .addition:
       return firstNumber + secondNumber
+    case .subtraction:
+      return firstNumber - secondNumber
     default:
       return firstNumber * secondNumber
     }
@@ -223,6 +227,14 @@ struct PracticeView: View {
 
         self.questions.append(Question(firstNumber: firstNumber, secondNumber: secondNumber, exerciseType: exerciseType))
       }
+
+    case .subtraction:
+      for firstNumber in 1...self.settings.subtractionNumber {
+        let secondNumber = Int.random(in: 0...firstNumber)
+
+        self.questions.append(Question(firstNumber: firstNumber, secondNumber: secondNumber, exerciseType: exerciseType))
+      }
+
     default:
       for multiplier in 1...self.settings.practiceRange {
         for multiplicant in 0..<self.questionsPerTable {
@@ -237,7 +249,7 @@ struct PracticeView: View {
   func generateAnswerSuggestions(question: Question) -> [(value: Int, isCorrect: Bool)] {
     var diff = question.firstNumber == 0 ? 1 : question.firstNumber
 
-    if self.settings.exerciseType == .addition {
+    if self.settings.exerciseType == .addition || self.settings.exerciseType == .subtraction {
       diff = Int.random(in: 1...2)
     }
 
