@@ -57,6 +57,7 @@ struct ContentView: View {
 
   @State private var practiceRange = 4
   @State private var additionSumRange = 20
+  @State private var subtractionNumber = 20
   @State private var selectedNumberOfQuestions = "10"
   @State private var isPracticeStarted = false
   @State private var exerciseType: ExerciseTypes = ExerciseTypes.multiplication
@@ -69,6 +70,9 @@ struct ContentView: View {
 
   let additionMinSumRange = 10
   let additionMaxSumRange = 100
+
+  let subtractionMinNumber = 10
+  let subtractionMaxNumber = 100
 
   var body: some View {
     GeometryReader { geo in
@@ -130,6 +134,34 @@ struct ContentView: View {
                     guard self.additionSumRange < self.additionMaxSumRange else { return }
                     self.additionSumRange += 10
                     self.exerciseType = ExerciseTypes.addition
+                  }
+                }
+              }
+                .padding([.top, .bottom], 10)
+                .font(.title)
+
+              // Subtraction exercise
+              Group {
+                HStack {
+                  ChangeDifficultyButton(label: "-", disabled: self.subtractionNumber <= self.subtractionMinNumber, size: self.practiceButtonSize) {
+                    guard self.additionSumRange > self.additionMinSumRange else { return }
+                    self.subtractionNumber -= 10
+                    self.exerciseType = ExerciseTypes.subtraction
+                  }
+
+                  SelectExerciseTypeButton(
+                    label: "\(self.subtractionNumber) - B",
+                    selected: self.exerciseType == ExerciseTypes.subtraction,
+                    width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34,
+                    height: self.practiceButtonSize - 20
+                  ) {
+                    self.exerciseType = ExerciseTypes.subtraction
+                  }
+
+                  ChangeDifficultyButton(label: "+", disabled: self.subtractionNumber >= self.subtractionMaxNumber, size: self.practiceButtonSize) {
+                    guard self.subtractionNumber < self.subtractionMaxNumber else { return }
+                    self.subtractionNumber += 10
+                    self.exerciseType = ExerciseTypes.subtraction
                   }
                 }
               }

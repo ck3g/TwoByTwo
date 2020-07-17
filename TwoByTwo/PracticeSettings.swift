@@ -12,6 +12,7 @@ import Combine
 enum ExerciseTypes {
   case multiplication
   case addition
+  case subtraction
 }
 
 final class PracticeSettings: ObservableObject {
