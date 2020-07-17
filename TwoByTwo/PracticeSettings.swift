@@ -26,6 +26,11 @@ final class PracticeSettings: ObservableObject {
       UserDefaults.standard.set(additionSumRange, forKey: "additionSumRange")
     }
   }
+  @Published var subtractionNumber: Int {
+    didSet {
+      UserDefaults.standard.set(subtractionNumber, forKey: "subtractionNumber")
+    }
+  }
   @Published var selectedNumberOfQuestions: String {
     didSet {
       UserDefaults.standard.set(selectedNumberOfQuestions, forKey: "selectedNumberOfQuestions")
@@ -37,6 +42,7 @@ final class PracticeSettings: ObservableObject {
   init() {
     self.practiceRange = 4
     self.additionSumRange = 20
+    self.subtractionNumber = 20
     self.selectedNumberOfQuestions = "10"
 
     if let practiceRange = UserDefaults.standard.integer(forKey: "practiceRange") as Int? {
@@ -45,6 +51,10 @@ final class PracticeSettings: ObservableObject {
 
     if let additionSumRange = UserDefaults.standard.integer(forKey: "additionSumRange") as Int? {
       self.additionSumRange = additionSumRange == 0 ? 20 : additionSumRange
+    }
+
+    if let subtractionNumber = UserDefaults.standard.integer(forKey: "subtractionNumber") as Int? {
+      self.subtractionNumber = subtractionNumber == 0 ? 20 : subtractionNumber
     }
 
     if let selectedNumberOfQuestions = UserDefaults.standard.string(forKey: "selectedNumberOfQuestions") {

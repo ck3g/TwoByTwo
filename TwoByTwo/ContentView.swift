@@ -201,6 +201,7 @@ struct ContentView: View {
           self.isPracticeStarted = true
           self.settings.practiceRange = self.practiceRange
           self.settings.additionSumRange = self.additionSumRange
+          self.settings.subtractionNumber = self.subtractionNumber
           self.settings.selectedNumberOfQuestions = self.selectedNumberOfQuestions
         }) {
           Image(systemName: "play.fill")
@@ -216,6 +217,7 @@ struct ContentView: View {
     .onAppear(perform: {
       self.practiceRange = self.settings.practiceRange
       self.additionSumRange = self.settings.additionSumRange
+      self.subtractionNumber = self.settings.subtractionNumber
       self.selectedNumberOfQuestions = self.settings.selectedNumberOfQuestions
     })
     .sheet(isPresented: $isPracticeStarted) {
