@@ -144,7 +144,7 @@ struct ContentView: View {
               Group {
                 HStack {
                   ChangeDifficultyButton(label: "-", disabled: self.subtractionNumber <= self.subtractionMinNumber, size: self.practiceButtonSize) {
-                    guard self.additionSumRange > self.additionMinSumRange else { return }
+                    guard self.additionSumRange >= self.additionMinSumRange else { return }
                     self.subtractionNumber -= 10
                     self.exerciseType = ExerciseTypes.subtraction
                   }
@@ -159,7 +159,7 @@ struct ContentView: View {
                   }
 
                   ChangeDifficultyButton(label: "+", disabled: self.subtractionNumber >= self.subtractionMaxNumber, size: self.practiceButtonSize) {
-                    guard self.subtractionNumber < self.subtractionMaxNumber else { return }
+                    guard self.subtractionNumber <= self.subtractionMaxNumber else { return }
                     self.subtractionNumber += 10
                     self.exerciseType = ExerciseTypes.subtraction
                   }
