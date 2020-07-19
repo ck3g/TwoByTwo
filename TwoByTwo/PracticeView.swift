@@ -187,30 +187,7 @@ struct PracticeView: View {
   }
 
   func generateQuestions(ofType exerciseType: ExerciseTypes) {
-    switch exerciseType {
-    case .addition:
-      for sum in 1...self.settings.additionSumRange {
-        let firstNumber = Int.random(in: 0..<sum)
-        let secondNumber = sum - firstNumber
-
-        self.questions.append(Question(firstNumber: firstNumber, secondNumber: secondNumber, exerciseType: exerciseType))
-      }
-
-    case .subtraction:
-      for firstNumber in 1...self.settings.subtractionNumber {
-        let secondNumber = Int.random(in: 0...firstNumber)
-
-        self.questions.append(Question(firstNumber: firstNumber, secondNumber: secondNumber, exerciseType: exerciseType))
-      }
-
-    default:
-      for multiplier in 1...self.settings.practiceRange {
-        for multiplicant in 0..<self.questionsPerTable {
-          self.questions.append(Question(firstNumber: multiplier, secondNumber: multiplicant, exerciseType: exerciseType))
-        }
-      }
-    }
-
+    self.questions = Question.generateQuestions(ofType: exerciseType, settings: self.settings)
     self.questions.shuffle()
   }
 
