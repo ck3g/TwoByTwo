@@ -53,12 +53,12 @@ struct ContentView: View {
 
   @EnvironmentObject var settings: PracticeSettings
 
-  let numberOfQuestions = ["5", "10", "20", "All"]
+  let numberOfQuestions = [5, 10, 20, 100]
 
   @State private var practiceRange = 4
   @State private var additionSumRange = 20
   @State private var subtractionNumber = 20
-  @State private var selectedNumberOfQuestions = "10"
+  @State private var selectedNumberOfQuestions = 10
   @State private var isPracticeStarted = false
   @State private var exerciseType: ExerciseTypes = ExerciseTypes.multiplication
 
@@ -179,7 +179,7 @@ struct ContentView: View {
                     Button(action: {
                       self.selectedNumberOfQuestions = questionNumber
                     }) {
-                      Text(questionNumber)
+                      Text("\(questionNumber)")
                         .frame(width: self.sizeClass == .compact ? 50 : 100)
                         .padding(18)
                         .background(Color("AppGreen"))

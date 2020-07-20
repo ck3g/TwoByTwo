@@ -51,7 +51,7 @@ struct PracticeView: View {
   @State private var isPracticeFinished = false
 
   var totalQuestions: Int {
-    let numberOfQuestions = Int(self.settings.selectedNumberOfQuestions) ?? 0
+    let numberOfQuestions = self.settings.selectedNumberOfQuestions
 
     return numberOfQuestions == 0
       ? questionsPerTable * self.settings.practiceRange
