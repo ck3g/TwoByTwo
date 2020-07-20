@@ -183,7 +183,7 @@ struct PracticeView: View {
   func pickNewQuestion(ofType exerciseType: ExerciseTypes) -> Question {
     self.questions.shuffle()
 
-    return self.questions.popLast() ?? Question(firstNumber: 2, secondNumber: 2, exerciseType: exerciseType)
+    return self.questions[0]
   }
 
   func generateQuestions(ofType exerciseType: ExerciseTypes) {
