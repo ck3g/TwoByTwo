@@ -53,12 +53,12 @@ struct ContentView: View {
 
   @EnvironmentObject var settings: PracticeSettings
 
-  let numberOfQuestions = [5, 10, 20, 100]
+  let numberOfQuestions = [10, 25, 50, 100]
 
   @State private var practiceRange = 4
   @State private var additionSumRange = 20
   @State private var subtractionNumber = 20
-  @State private var selectedNumberOfQuestions = 10
+  @State private var selectedNumberOfQuestions = 25
   @State private var isPracticeStarted = false
   @State private var exerciseType: ExerciseTypes = ExerciseTypes.multiplication
 
