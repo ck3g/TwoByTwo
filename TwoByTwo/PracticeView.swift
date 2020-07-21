@@ -126,7 +126,7 @@ struct PracticeView: View {
 
               if self.questionsAnswered < self.totalQuestions {
                 self.currentQuestion = self.pickNewQuestion(ofType: self.settings.exerciseType)
-                self.currentAnswerSuggestions = self.generateAnswerSuggestions(question: self.currentQuestion)
+                self.currentAnswerSuggestions = self.currentQuestion.generateAnswerSuggestions()
                 self.nextButtonDisabled = true
                 self.buttonDidTap = false
                 self.buttonColors = Array(repeating: Color("AppOrange"), count: 4)
@@ -167,7 +167,7 @@ struct PracticeView: View {
       .onAppear(perform: {
         self.generateQuestions(ofType: self.settings.exerciseType)
         self.currentQuestion = self.pickNewQuestion(ofType: self.settings.exerciseType)
-        self.currentAnswerSuggestions = self.generateAnswerSuggestions(question: self.currentQuestion)
+        self.currentAnswerSuggestions = self.currentQuestion.generateAnswerSuggestions()
       })
     }
   }
@@ -189,25 +189,6 @@ struct PracticeView: View {
   func generateQuestions(ofType exerciseType: ExerciseTypes) {
     self.questions = Question.generateQuestions(ofType: exerciseType, settings: self.settings)
     self.questions.shuffle()
-  }
-
-  func generateAnswerSuggestions(question: Question) -> [(value: Int, isCorrect: Bool)] {
-    var diff = question.firstNumber == 0 ? 1 : question.firstNumber
-
-    if self.settings.exerciseType == .addition || self.settings.exerciseType == .subtraction {
-      diff = Int.random(in: 1...2)
-    }
-
-    var answers = [
-      (value: question.result, isCorrect: true),
-      (value: question.result + diff, isCorrect: false),
-      (value: question.result - diff, isCorrect: false),
-      (value: question.result + diff + 1, isCorrect: false)
-    ]
-
-    answers.shuffle()
-
-    return answers
   }
 
   func calculateButtonColor(buttonIndex: Int) -> Color {

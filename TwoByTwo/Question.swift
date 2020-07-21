@@ -69,4 +69,23 @@ struct Question {
 
     return questions
   }
+
+  func generateAnswerSuggestions() -> [(value: Int, isCorrect: Bool)] {
+    var diff = self.firstNumber == 0 ? 1 : self.firstNumber
+
+    if self.exerciseType == .addition || self.exerciseType == .subtraction {
+      diff = Int.random(in: 1...2)
+    }
+
+    var answers = [
+      (value: self.result, isCorrect: true),
+      (value: self.result + diff, isCorrect: false),
+      (value: self.result - diff, isCorrect: false),
+      (value: self.result + diff + 1, isCorrect: false)
+    ]
+
+    answers.shuffle()
+
+    return answers
+  }
 }
