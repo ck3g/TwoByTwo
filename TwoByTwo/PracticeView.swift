@@ -23,7 +23,6 @@ struct NewAnswerButton: View {
         .foregroundColor(.white)
         .background(self.backgroundColor)
         .clipShape(RoundedRectangle(cornerRadius: UISettings.cornerRadius))
-        .animation(.easeInOut)
     }
   }
 }
