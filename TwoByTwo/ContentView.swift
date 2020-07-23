@@ -58,6 +58,7 @@ struct ContentView: View {
   @State private var practiceRange = 4
   @State private var additionSumRange = 20
   @State private var subtractionNumber = 20
+  @State private var divisionDivider = 3
   @State private var selectedNumberOfQuestions = 25
   @State private var isPracticeStarted = false
   @State private var exerciseType: ExerciseTypes = ExerciseTypes.multiplication
@@ -73,6 +74,9 @@ struct ContentView: View {
 
   let subtractionMinNumber = 10
   let subtractionMaxNumber = 100
+
+  let divisionMinDivider = 2
+  let divisionMaxDivider = 10
 
   var body: some View {
     GeometryReader { geo in
@@ -168,6 +172,34 @@ struct ContentView: View {
                 .padding([.top, .bottom], 10)
                 .font(.title)
 
+              // Division exercise
+              Group {
+                HStack {
+                  ChangeDifficultyButton(label: "-", disabled: self.divisionDivider <= self.divisionMinDivider, size: self.practiceButtonSize) {
+                    guard self.divisionDivider >= self.divisionMinDivider else { return }
+                    self.divisionDivider -= 1
+                    self.exerciseType = ExerciseTypes.division
+                  }
+
+                  SelectExerciseTypeButton(
+                    label: "A ÷ \(self.divisionDivider)",
+                    selected: self.exerciseType == ExerciseTypes.division,
+                    width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34,
+                    height: self.practiceButtonSize - 20
+                  ) {
+                    self.exerciseType = ExerciseTypes.division
+                  }
+
+                  ChangeDifficultyButton(label: "+", disabled: self.divisionDivider >= self.divisionMaxDivider, size: self.practiceButtonSize) {
+                    guard self.divisionDivider <= self.divisionMaxDivider else { return }
+                    self.divisionDivider += 1
+                    self.exerciseType = ExerciseTypes.division
+                  }
+                }
+              }
+                .padding([.top, .bottom], 10)
+                .font(.title)
+
               Group {
                 Text("Number of questions?")
                   .font(.headline)
@@ -202,6 +234,7 @@ struct ContentView: View {
           self.settings.practiceRange = self.practiceRange
           self.settings.additionSumRange = self.additionSumRange
           self.settings.subtractionNumber = self.subtractionNumber
+          self.settings.divisionDivider = self.divisionDivider
           self.settings.selectedNumberOfQuestions = self.selectedNumberOfQuestions
         }) {
           Image(systemName: "play.fill")
@@ -218,6 +251,7 @@ struct ContentView: View {
       self.practiceRange = self.settings.practiceRange
       self.additionSumRange = self.settings.additionSumRange
       self.subtractionNumber = self.settings.subtractionNumber
+      self.divisionDivider = self.settings.divisionDivider
       self.selectedNumberOfQuestions = self.settings.selectedNumberOfQuestions
     })
     .sheet(isPresented: $isPracticeStarted) {
