@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-enum ExerciseTypes {
+enum ExerciseTypes: String {
   case multiplication
   case addition
   case subtraction
@@ -37,19 +37,23 @@ final class PracticeSettings: ObservableObject {
       UserDefaults.standard.set(divisionDivider, forKey: "divisionDivider")
     }
   }
+  @Published var exerciseType: ExerciseTypes {
+    didSet {
+      UserDefaults.standard.set(exerciseType.rawValue, forKey: "exerciseType")
+    }
+  }
   @Published var selectedNumberOfQuestions: Int {
     didSet {
       UserDefaults.standard.set(selectedNumberOfQuestions, forKey: "selectedNumberOfQuestions")
     }
   }
 
-  var exerciseType = ExerciseTypes.multiplication
-
   init() {
     self.practiceRange = 4
     self.additionSumRange = 20
     self.subtractionNumber = 20
     self.divisionDivider = 3
+    self.exerciseType = .multiplication
     self.selectedNumberOfQuestions = 25
 
     if let practiceRange = UserDefaults.standard.integer(forKey: "practiceRange") as Int? {
@@ -66,6 +70,10 @@ final class PracticeSettings: ObservableObject {
 
     if let divisionDivider = UserDefaults.standard.integer(forKey: "divisionDivider") as Int? {
       self.divisionDivider = divisionDivider == 0 ? 3 : divisionDivider
+    }
+
+    if let exerciseType = UserDefaults.standard.string(forKey: "exerciseType") as String? {
+      self.exerciseType = ExerciseTypes.init(rawValue: exerciseType) ?? ExerciseTypes.multiplication
     }
 
     if let selectedNumberOfQuestions = UserDefaults.standard.integer(forKey: "selectedNumberOfQuestions") as Int? {

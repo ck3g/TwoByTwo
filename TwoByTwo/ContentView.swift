@@ -103,7 +103,7 @@ struct ContentView: View {
                     width: self.screenWidth(geo) - (self.practiceButtonSize * 2) - 34,
                     height: self.practiceButtonSize - 20
                   ) {
-                      self.exerciseType = ExerciseTypes.multiplication
+                    self.exerciseType = ExerciseTypes.multiplication
                   }
 
                   ChangeDifficultyButton(label: "+", disabled: self.practiceRange >= self.maxPracticeRange, size: self.practiceButtonSize) {
@@ -252,6 +252,7 @@ struct ContentView: View {
       self.additionSumRange = self.settings.additionSumRange
       self.subtractionNumber = self.settings.subtractionNumber
       self.divisionDivider = self.settings.divisionDivider
+      self.exerciseType = self.settings.exerciseType
       self.selectedNumberOfQuestions = self.settings.selectedNumberOfQuestions
     })
     .sheet(isPresented: $isPracticeStarted) {
