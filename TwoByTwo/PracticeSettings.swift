@@ -13,6 +13,7 @@ enum ExerciseTypes {
   case multiplication
   case addition
   case subtraction
+  case division
 }
 
 final class PracticeSettings: ObservableObject {
@@ -31,6 +32,11 @@ final class PracticeSettings: ObservableObject {
       UserDefaults.standard.set(subtractionNumber, forKey: "subtractionNumber")
     }
   }
+  @Published var divisionDivider: Int {
+    didSet {
+      UserDefaults.standard.set(divisionDivider, forKey: "divisionDivider")
+    }
+  }
   @Published var selectedNumberOfQuestions: Int {
     didSet {
       UserDefaults.standard.set(selectedNumberOfQuestions, forKey: "selectedNumberOfQuestions")
@@ -43,6 +49,7 @@ final class PracticeSettings: ObservableObject {
     self.practiceRange = 4
     self.additionSumRange = 20
     self.subtractionNumber = 20
+    self.divisionDivider = 3
     self.selectedNumberOfQuestions = 25
 
     if let practiceRange = UserDefaults.standard.integer(forKey: "practiceRange") as Int? {
@@ -55,6 +62,10 @@ final class PracticeSettings: ObservableObject {
 
     if let subtractionNumber = UserDefaults.standard.integer(forKey: "subtractionNumber") as Int? {
       self.subtractionNumber = subtractionNumber == 0 ? 20 : subtractionNumber
+    }
+
+    if let divisionDivider = UserDefaults.standard.integer(forKey: "divisionDivider") as Int? {
+      self.divisionDivider = divisionDivider == 0 ? 3 : divisionDivider
     }
 
     if let selectedNumberOfQuestions = UserDefaults.standard.integer(forKey: "selectedNumberOfQuestions") as Int? {
