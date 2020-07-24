@@ -78,6 +78,11 @@ struct ContentView: View {
   let divisionMinDivider = 2
   let divisionMaxDivider = 10
 
+  let addition = Exercise(exerciseType: .addition)
+  let subtraction = Exercise(exerciseType: .subtraction)
+  let multiplication = Exercise(exerciseType: .multiplication)
+  let division = Exercise(exerciseType: .division)
+
   var body: some View {
     GeometryReader { geo in
       VStack {
@@ -93,7 +98,7 @@ struct ContentView: View {
                 HStack {
                   ChangeDifficultyButton(label: "-", disabled: self.practiceRange <= self.minPracticeRange, size: self.practiceButtonSize) {
                     guard self.practiceRange > self.minPracticeRange else { return }
-                    self.practiceRange -= 1
+                    self.practiceRange -= self.multiplication.difficultyStep
                     self.exerciseType = ExerciseTypes.multiplication
                   }
 
@@ -108,7 +113,7 @@ struct ContentView: View {
 
                   ChangeDifficultyButton(label: "+", disabled: self.practiceRange >= self.maxPracticeRange, size: self.practiceButtonSize) {
                     guard self.practiceRange < self.maxPracticeRange else { return }
-                    self.practiceRange += 1
+                    self.practiceRange += self.multiplication.difficultyStep
                     self.exerciseType = ExerciseTypes.multiplication
                   }
                 }
@@ -121,7 +126,7 @@ struct ContentView: View {
                 HStack {
                   ChangeDifficultyButton(label: "-", disabled: self.additionSumRange <= self.additionMinSumRange, size: self.practiceButtonSize) {
                     guard self.additionSumRange > self.additionMinSumRange else { return }
-                    self.additionSumRange -= 10
+                    self.additionSumRange -= self.addition.difficultyStep
                     self.exerciseType = ExerciseTypes.addition
                   }
 
@@ -136,7 +141,7 @@ struct ContentView: View {
 
                   ChangeDifficultyButton(label: "+", disabled: self.additionSumRange >= self.additionMaxSumRange, size: self.practiceButtonSize) {
                     guard self.additionSumRange < self.additionMaxSumRange else { return }
-                    self.additionSumRange += 10
+                    self.additionSumRange += self.addition.difficultyStep
                     self.exerciseType = ExerciseTypes.addition
                   }
                 }
@@ -149,7 +154,7 @@ struct ContentView: View {
                 HStack {
                   ChangeDifficultyButton(label: "-", disabled: self.subtractionNumber <= self.subtractionMinNumber, size: self.practiceButtonSize) {
                     guard self.additionSumRange >= self.additionMinSumRange else { return }
-                    self.subtractionNumber -= 10
+                    self.subtractionNumber -= self.subtraction.difficultyStep
                     self.exerciseType = ExerciseTypes.subtraction
                   }
 
@@ -164,7 +169,7 @@ struct ContentView: View {
 
                   ChangeDifficultyButton(label: "+", disabled: self.subtractionNumber >= self.subtractionMaxNumber, size: self.practiceButtonSize) {
                     guard self.subtractionNumber <= self.subtractionMaxNumber else { return }
-                    self.subtractionNumber += 10
+                    self.subtractionNumber += self.subtraction.difficultyStep
                     self.exerciseType = ExerciseTypes.subtraction
                   }
                 }
@@ -177,7 +182,7 @@ struct ContentView: View {
                 HStack {
                   ChangeDifficultyButton(label: "-", disabled: self.divisionDivider <= self.divisionMinDivider, size: self.practiceButtonSize) {
                     guard self.divisionDivider >= self.divisionMinDivider else { return }
-                    self.divisionDivider -= 1
+                    self.divisionDivider -= self.division.difficultyStep
                     self.exerciseType = ExerciseTypes.division
                   }
 
@@ -192,7 +197,7 @@ struct ContentView: View {
 
                   ChangeDifficultyButton(label: "+", disabled: self.divisionDivider >= self.divisionMaxDivider, size: self.practiceButtonSize) {
                     guard self.divisionDivider <= self.divisionMaxDivider else { return }
-                    self.divisionDivider += 1
+                    self.divisionDivider += self.division.difficultyStep
                     self.exerciseType = ExerciseTypes.division
                   }
                 }

@@ -16,6 +16,7 @@
 		346FEF2523827ABE00F0F7A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 346FEF2423827ABE00F0F7A9 /* Preview Assets.xcassets */; };
 		346FEF2823827ABE00F0F7A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 346FEF2623827ABE00F0F7A9 /* LaunchScreen.storyboard */; };
 		34A173B324C370F5003AD1D2 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A173B224C370F5003AD1D2 /* Question.swift */; };
+		34A173B524CADD1B003AD1D2 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A173B424CADD1B003AD1D2 /* Exercise.swift */; };
 		34E0BB1C2383E19600260EB1 /* PracticeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0BB1B2383E19600260EB1 /* PracticeSettings.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		346FEF2723827ABE00F0F7A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		346FEF2923827ABE00F0F7A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34A173B224C370F5003AD1D2 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		34A173B424CADD1B003AD1D2 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		34E0BB1B2383E19600260EB1 /* PracticeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 				346FEF1B23827ABD00F0F7A9 /* AppDelegate.swift */,
 				346FEF1D23827ABD00F0F7A9 /* SceneDelegate.swift */,
 				346FEF1F23827ABD00F0F7A9 /* ContentView.swift */,
+				34A173B424CADD1B003AD1D2 /* Exercise.swift */,
 				346FEF2123827ABE00F0F7A9 /* Assets.xcassets */,
 				346FEF2623827ABE00F0F7A9 /* LaunchScreen.storyboard */,
 				346FEF2923827ABE00F0F7A9 /* Info.plist */,
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				343B783B23E5A37800993C95 /* PracticeView.swift in Sources */,
+				34A173B524CADD1B003AD1D2 /* Exercise.swift in Sources */,
 				346FEF1C23827ABD00F0F7A9 /* AppDelegate.swift in Sources */,
 				342D8E1A24BCA4BE00D25A68 /* UISettings.swift in Sources */,
 				34E0BB1C2383E19600260EB1 /* PracticeSettings.swift in Sources */,
