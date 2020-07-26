@@ -6,6 +6,6 @@ The app is aiming to help kids to practice multiplication, addition, subtraction
 
 Select an exercice type and difficulty. Tap on start button. Practice.
 
-![Practice settings screen](screenshots/iphone/iPhone 11 Pro Max - 1.png)
+![Practice settings screen](screenshots/iphone/iPhone11ProMax-1.png)
 
-![Practice screen](screenshots/iphone/iPhone 11 Pro Max - 2.png)
+![Practice screen](screenshots/iphone/iPhone11ProMax-2.png)
