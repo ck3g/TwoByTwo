@@ -231,6 +231,7 @@ struct ContentView: View {
               Spacer()
             }
           }
+          .frame(width: geo.size.width)
         }
 
         Button(action: {

@@ -116,6 +116,7 @@ struct PracticeView: View {
               }
             }
           }
+          .frame(width: geo.size.width)
         }
 
         VStack {
